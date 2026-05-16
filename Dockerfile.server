@@ -117,4 +117,4 @@ ENV CRAFT_MESSAGING_NODE_BIN=node
 
 EXPOSE 9100
 
-ENTRYPOINT ["bun", "run", "packages/server/src/index.ts"]
+ENTRYPOINT ["bun", "run", "packages/server/src/index.ts", "--allow-insecure-bind"]
