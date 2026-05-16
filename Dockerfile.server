@@ -98,7 +98,11 @@ RUN find /app -not -perm -o=r -exec chmod o+r {} + && \
     find /app -type d -not -perm -o=x -exec chmod o+x {} + && \
     chmod -R 777 /home/craftagents
 
-USER craftagents
+# Railway mounts volumes owned by root; running as the non-root `craftagents`
+# user causes EACCES on the volume mount path. Keep root for v0.9.4 deploy on
+# Railway. Set HOME so the server's state path ($HOME/.craft-agent) matches
+# where the volume is mounted.
+ENV HOME=/home/craftagents
 
 ENV CRAFT_RPC_HOST=0.0.0.0
 ENV CRAFT_RPC_PORT=9100
